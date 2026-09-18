@@ -1,36 +1,96 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Callion
 
-## Getting Started
+Professional SIP / VoIP landing page with a Node.js API for application (ariza) submissions.
 
-First, run the development server:
+## Stack
+
+- Frontend: Next.js, React, TypeScript, Tailwind CSS
+- Backend: Node.js, Express, Prisma, PostgreSQL
+
+## Setup
+
+1. Install dependencies:
+
+```bash
+npm install
+```
+
+2. Create a PostgreSQL database.
+
+3. Copy environment variables:
+
+```bash
+cp .env.example .env
+```
+
+On Windows PowerShell:
+
+```powershell
+Copy-Item .env.example .env
+```
+
+4. Put your database credentials into `.env`. Never commit real passwords.
+
+```env
+DATABASE_URL=postgresql://USERNAME:PASSWORD@HOST:5432/DATABASE_NAME
+PORT=4000
+NODE_ENV=development
+CORS_ORIGIN=http://localhost:3000
+NEXT_PUBLIC_API_URL=http://localhost:4000
+```
+
+5. Generate the Prisma client and run migrations:
+
+```bash
+npm run db:generate
+npm run db:migrate
+```
+
+6. Start the API:
+
+```bash
+npm run server
+```
+
+7. Start the frontend (in another terminal):
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Frontend: http://localhost:3000  
+API: http://localhost:4000
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Scripts
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- `npm run dev` — Next.js frontend
+- `npm run server` — Express API (watch mode)
+- `npm run build` — production frontend build
+- `npm run start` — start the production frontend
+- `npm run db:generate` — generate Prisma client
+- `npm run db:migrate` — apply Prisma migrations
+- `npm run db:migrate:dev` — create/apply migrations in development
 
-## Learn More
+## API
 
-To learn more about Next.js, take a look at the following resources:
+`POST /api/applications`
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```json
+{
+  "name": "Ali Valiyev",
+  "phone": "+998901234567",
+  "company": "Example LLC",
+  "email": "ali@example.com",
+  "service": "SIP telefoniya",
+  "message": "Kompaniyamiz uchun SIP yechim kerak"
+}
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Successful response:
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```json
+{
+  "success": true,
+  "message": "Arizangiz qabul qilindi"
+}
+```
