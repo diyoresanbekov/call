@@ -1,7 +1,7 @@
 import { z } from "zod";
 
-export const applicationFormSchema = z.object({
-  name: z.string().trim().min(2).max(120),
+export const applicationSchema = z.object({
+  name: z.string().trim().min(2, "Name is required").max(120),
   phone: z
     .string()
     .trim()
@@ -9,7 +9,5 @@ export const applicationFormSchema = z.object({
     .refine((value) => /^\+?\d{9,15}$/.test(value), {
       message: "Invalid phone",
     }),
-  company: z.string().trim().min(2).max(160),
+  company: z.string().trim().min(2, "Company is required").max(160),
 });
-
-export type ApplicationFormInput = z.infer<typeof applicationFormSchema>;

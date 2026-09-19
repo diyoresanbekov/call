@@ -1,3 +1,9 @@
 export function getApiUrl(): string {
-  return process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:4000";
+  const value = process.env.NEXT_PUBLIC_API_URL?.trim();
+
+  if (!value) {
+    return "http://localhost:4000";
+  }
+
+  return value.replace(/\/$/, "");
 }

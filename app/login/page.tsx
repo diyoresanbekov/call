@@ -12,7 +12,7 @@ export default function LoginPage() {
           </span>
           <span className="text-[15px] font-medium tracking-tight text-ink">Callion</span>
         </Link>
-        <div className="mt-8 w-full max-w-md rounded-xl2 border border-border bg-surface-2 p-6 sm:p-8">
+        <div className="mt-8 w-full max-w-md rounded-xl2 border border-border bg-surface p-6 shadow-window-frame sm:p-8">
           <h1 className="text-2xl font-semibold tracking-tight text-ink">Kirish</h1>
           <p className="mt-2 text-sm text-ink-muted">
             SIP ish stoli ilovasiga korporativ hisobingiz bilan kiring.

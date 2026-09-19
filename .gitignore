@@ -35,6 +35,11 @@ yarn-error.log*
 .env.local
 .env.*.local
 !.env.example
+backend/.env
+
+# backend
+backend/node_modules
+backend/.vercel
 
 # vercel
 .vercel

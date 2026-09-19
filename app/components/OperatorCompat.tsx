@@ -50,11 +50,11 @@ export default function OperatorCompat() {
           {operators.map((op) => (
             <div
               key={op.name}
-              className="surface-card p-5 transition duration-200 hover:border-signal/35 hover:bg-surface-3"
+              className="surface-card p-5 transition duration-200 hover:border-signal/40 hover:shadow-[0_8px_24px_-18px_rgba(24,24,27,0.25)]"
             >
               <div className="flex items-center gap-3">
                 <span
-                  className="flex h-9 w-9 items-center justify-center rounded-lg text-xs font-semibold text-canvas"
+                  className="flex h-9 w-9 items-center justify-center rounded-lg text-xs font-semibold text-white"
                   style={{ backgroundColor: op.color }}
                 >
                   {op.mono}

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { Eye, EyeOff } from "lucide-react";
 
 export default function LoginForm() {
@@ -57,9 +58,9 @@ export default function LoginForm() {
 
       <p className="pt-2 text-center text-xs text-ink-faint">
         Hisobingiz yo&apos;qmi?{" "}
-        <a href="/#demo" className="text-ink-muted transition-colors duration-200 hover:text-ink">
+        <Link href="/#demo" className="text-ink-muted transition-colors duration-200 hover:text-ink">
           Demo so&apos;rang
-        </a>
+        </Link>
       </p>
     </form>
   );

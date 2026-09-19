@@ -41,7 +41,7 @@ export default function Navbar() {
   };
 
   return (
-    <header className="sticky top-0 z-50 border-b border-white/[0.06] bg-canvas/75 backdrop-blur-md">
+    <header className="sticky top-0 z-50 border-b border-border bg-surface/80 backdrop-blur-md">
       <div className="page-wrap relative z-50 flex h-16 items-center justify-between">
         <Link href="/" className="flex items-center gap-2">
           <span className="flex h-7 w-7 items-center justify-center rounded-md bg-signal-faint text-signal">
@@ -65,12 +65,6 @@ export default function Navbar() {
         </nav>
 
         <div className="flex items-center gap-3">
-          {/* <Link
-            href="/login"
-            className="hidden text-sm text-ink-muted transition-colors duration-200 hover:text-ink sm:block"
-          >
-            Kirish
-          </Link> */}
           <a href="#demo" className="hidden btn-primary sm:inline-flex">
             Demo olib korish
           </a>
@@ -92,7 +86,7 @@ export default function Navbar() {
         <div className="md:hidden">
           <button
             type="button"
-            className="fixed inset-0 z-40 bg-canvas/60"
+            className="fixed inset-0 z-40 bg-ink/20"
             aria-label="Menyuni yopish"
             onClick={closeMenu}
           />
@@ -108,7 +102,7 @@ export default function Navbar() {
                   ref={index === 0 ? firstLinkRef : undefined}
                   href={link.href}
                   onClick={closeMenu}
-                  className="rounded-lg px-3 py-3 text-sm text-ink-muted transition-colors duration-200 hover:bg-surface-2 hover:text-ink"
+                  className="rounded-lg px-3 py-3 text-sm text-ink-muted transition-colors duration-200 hover:bg-surface-3 hover:text-ink"
                 >
                   {link.label}
                 </a>
@@ -116,7 +110,7 @@ export default function Navbar() {
               <Link
                 href="/login"
                 onClick={closeMenu}
-                className="rounded-lg px-3 py-3 text-sm text-ink-muted transition-colors duration-200 hover:bg-surface-2 hover:text-ink"
+                className="rounded-lg px-3 py-3 text-sm text-ink-muted transition-colors duration-200 hover:bg-surface-3 hover:text-ink"
               >
                 Kirish
               </Link>

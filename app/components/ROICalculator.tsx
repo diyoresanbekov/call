@@ -66,7 +66,7 @@ export default function ROICalculator() {
           </div>
 
           <h2 className="mt-3 text-2xl font-semibold tracking-tight text-ink md:text-3xl">
-            O'zingizga mos tarifni tanlang
+            O&apos;zingizga mos tarifni tanlang
           </h2>
 
           <p className="mt-3 text-ink-muted">
@@ -80,10 +80,10 @@ export default function ROICalculator() {
           {plans.map((plan) => (
             <div
               key={plan.name}
-              className={`relative flex flex-col rounded-xl2 border p-6 transition-all ${
+              className={`relative flex flex-col rounded-xl2 border bg-surface p-6 shadow-[0_1px_2px_rgba(24,24,27,0.04)] transition-all ${
                 plan.popular
-                  ? "border-signal bg-surface-2 shadow-sm"
-                  : "border-border bg-surface-2"
+                  ? "border-signal"
+                  : "border-border"
               }`}
             >
               {/* Popular badge */}
@@ -127,7 +127,7 @@ export default function ROICalculator() {
                       key={feature}
                       className="flex items-start gap-2.5 text-sm text-ink-muted"
                     >
-                      <Check className="mt-0.5 h-4 w-4 shrink-0 text-signal" />
+                      <Check className="mt-0.5 h-4 w-4 shrink-0 text-live" />
                       <span>{feature}</span>
                     </li>
                   ))}
@@ -135,16 +135,16 @@ export default function ROICalculator() {
               </div>
 
               {/* Button */}
-              <button
-                type="button"
-                className={`mt-8 w-full rounded-lg px-4 py-3 text-sm font-medium transition-colors ${
+              <a
+                href="#demo"
+                className={`mt-8 flex w-full items-center justify-center rounded-lg px-4 py-3 text-sm font-medium transition-colors ${
                   plan.popular
-                    ? "bg-signal text-white hover:opacity-90"
+                    ? "bg-signal text-white hover:bg-signal-dim"
                     : "border border-border bg-surface text-ink hover:bg-surface-3"
                 }`}
               >
-                So'rov qoldirish
-              </button>
+                So&apos;rov qoldirish
+              </a>
             </div>
           ))}
         </div>

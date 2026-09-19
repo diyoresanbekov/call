@@ -34,19 +34,19 @@
   }
 
   .btn-primary {
-    @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-lg bg-signal px-5 py-2.5 text-sm font-medium text-ink transition duration-200 hover:bg-signal-dim active:scale-[0.98];
+    @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-lg bg-signal px-5 py-2.5 text-sm font-medium text-white transition duration-200 hover:bg-signal-dim active:scale-[0.98];
   }
 
   .btn-secondary {
-    @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-lg border border-border bg-transparent px-5 py-2.5 text-sm font-medium text-ink transition duration-200 hover:bg-surface-2 active:scale-[0.98];
+    @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-lg border border-border bg-surface px-5 py-2.5 text-sm font-medium text-ink transition duration-200 hover:bg-surface-3 active:scale-[0.98];
   }
 
   .surface-card {
-    @apply rounded-xl2 border border-border bg-surface-2;
+    @apply rounded-xl2 border border-border bg-surface shadow-[0_1px_2px_rgba(24,24,27,0.04)];
   }
 
   .field-input {
-    @apply w-full rounded-lg border border-border bg-surface-2 px-3.5 py-2.5 text-sm text-ink placeholder:text-ink-faint transition duration-200 focus:border-signal/50;
+    @apply w-full rounded-lg border border-border bg-surface px-3.5 py-2.5 text-sm text-ink placeholder:text-ink-muted transition duration-200 focus:border-signal focus:ring-4 focus:ring-signal/10;
   }
 }
 
@@ -58,8 +58,8 @@
   .hero-glow {
     background: radial-gradient(
       circle at top right,
-      rgba(124, 92, 252, 0.1),
-      transparent 40%
+      rgba(249, 115, 22, 0.08),
+      transparent 42%
     );
   }
 }

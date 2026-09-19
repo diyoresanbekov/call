@@ -69,7 +69,7 @@ export default function TrustSection() {
 
         <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {reasons.map(({ icon: Icon, title, description }) => (
-            <div key={title} className="surface-card p-5">
+            <div key={title} className="surface-card p-5 transition duration-200 hover:border-signal/40">
               <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-signal-faint text-signal">
                 <Icon className="h-4 w-4" strokeWidth={2.25} />
               </span>
@@ -86,9 +86,9 @@ export default function TrustSection() {
             {partners.map((partner) => (
               <div
                 key={partner.name}
-                className="flex flex-col overflow-hidden rounded-xl2 border border-border bg-surface-2 transition duration-200 hover:border-signal/35 hover:bg-surface-3"
+                className="flex flex-col overflow-hidden rounded-xl2 border border-border bg-surface shadow-[0_1px_2px_rgba(24,24,27,0.04)] transition duration-200 hover:border-signal/40"
               >
-                <div className="relative h-36 w-full overflow-hidden bg-surface">
+                <div className="relative h-36 w-full overflow-hidden bg-canvas">
                   {/* External partner logos; next/image host allowlists would be brittle here. */}
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
@@ -102,7 +102,7 @@ export default function TrustSection() {
                     {partner.name}
                   </span>
                   {partner.note ? (
-                    <span className="mt-3 inline-flex items-center gap-2 rounded-full bg-live/10 px-3 py-1 text-xs font-medium text-live">
+                    <span className="mt-3 inline-flex items-center gap-2 rounded-full bg-live-faint px-3 py-1 text-xs font-medium text-live">
                       <span className="h-1.5 w-1.5 rounded-full bg-live" />
                       {partner.note}
                     </span>
