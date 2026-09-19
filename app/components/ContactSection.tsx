@@ -33,6 +33,7 @@ export default function ContactSection() {
     event.preventDefault();
     setFieldError(null);
 
+    // 1. Zod Validatsiyasi
     const parsed = applicationFormSchema.safeParse({
       name: form.name,
       phone: form.phone,
@@ -40,14 +41,18 @@ export default function ContactSection() {
     });
 
     if (!parsed.success) {
-      setFieldError("Ma'lumotlarni tekshiring");
+      // Birinchi topilgan validatsiya xatosini ko'rsatish
+      const firstIssue = parsed.error.issues[0]?.message;
+      setFieldError(firstIssue || "Ma'lumotlarni to'g'ri kiriting");
       return;
     }
 
     setStatus("submitting");
 
     try {
-      const response = await fetch(`${getApiUrl()}/api/applications`, {
+      const apiUrl = `${getApiUrl()}/api/applications`;
+
+      const response = await fetch(apiUrl, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -56,17 +61,19 @@ export default function ContactSection() {
       });
 
       const payload = (await response.json().catch(() => null)) as
-        | { success?: boolean }
+        | { success?: boolean; error?: string }
         | null;
 
       if (!response.ok || !payload?.success) {
+        console.error("API error response:", payload);
         setStatus("error");
         return;
       }
 
       setStatus("success");
       setForm(emptyForm);
-    } catch {
+    } catch (err) {
+      console.error("Fetch request failed:", err);
       setStatus("error");
     }
   };
@@ -88,9 +95,7 @@ export default function ContactSection() {
 
             <h2 className="max-w-xl text-3xl font-semibold leading-tight tracking-tight text-ink md:text-4xl lg:text-[42px]">
               Demo oling yoki{" "}
-              <span className="text-signal">
-                to&apos;liq ma&apos;lumot
-              </span>{" "}
+              <span className="text-signal">to&apos;liq ma&apos;lumot</span>{" "}
               oling
             </h2>
 
@@ -142,6 +147,13 @@ export default function ContactSection() {
                 <p className="mt-3 text-sm leading-6 text-ink-muted">
                   Tez orada siz bilan bog&apos;lanamiz.
                 </p>
+
+                <button
+                  onClick={() => setStatus("idle")}
+                  className="mt-6 text-xs text-signal underline underline-offset-4"
+                >
+                  Yana ariza yuborish
+                </button>
               </div>
             </div>
           ) : (
@@ -179,7 +191,7 @@ export default function ContactSection() {
                     placeholder="Ism kiriting..."
                     value={form.name}
                     onChange={onChange}
-                    className="field-input h-12 px-4"
+                    className="field-input h-12 w-full rounded-lg border border-border px-4 text-sm outline-none focus:border-signal"
                   />
                 </div>
 
@@ -199,7 +211,7 @@ export default function ContactSection() {
                     placeholder="+998 90 123 45 67"
                     value={form.phone}
                     onChange={onChange}
-                    className="field-input h-12 px-4 font-mono placeholder:font-sans"
+                    className="field-input h-12 w-full rounded-lg border border-border px-4 font-mono text-sm outline-none focus:border-signal placeholder:font-sans"
                   />
                 </div>
 
@@ -219,7 +231,7 @@ export default function ContactSection() {
                     placeholder="Tashkilot nomini kiriting..."
                     value={form.company}
                     onChange={onChange}
-                    className="field-input h-12 px-4"
+                    className="field-input h-12 w-full rounded-lg border border-border px-4 text-sm outline-none focus:border-signal"
                   />
                 </div>
               </div>
@@ -235,15 +247,14 @@ export default function ContactSection() {
                   className="mt-4 rounded-lg border border-danger/20 bg-danger/5 px-3 py-2.5 text-sm text-danger"
                   role="alert"
                 >
-                  Arizani yuborishda xatolik yuz berdi. Iltimos, qayta
-                  urinib ko&apos;ring.
+                  Arizani yuborishda xatolik yuz berdi. Server sozlamalari va tarmoqni tekshirib, qayta urinib ko&apos;ring.
                 </p>
               ) : null}
 
               <button
                 type="submit"
                 disabled={status === "submitting"}
-                className="btn-primary mt-6 h-12 w-full disabled:cursor-not-allowed disabled:opacity-70"
+                className="btn-primary mt-6 h-12 w-full rounded-lg bg-signal text-white font-medium hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-70 transition-all"
               >
                 {status === "submitting" ? "Yuborilmoqda..." : "Ariza qoldirish"}
               </button>
