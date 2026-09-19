@@ -10,42 +10,37 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Supabase ulanishi .env fayldan olinadi
+// Supabase ulanishi (.env faylidan olinadi)
 const supabase = createClient(
   process.env.SUPABASE_URL,
   process.env.SUPABASE_SERVICE_ROLE_KEY
 );
 
-// Kelayotgan datani POST qilib Supabase-ga saqlaydigan logika
-app.post('/api/data', async (req, res) => {
+// Front-end yuborayotgan /api/applications yo'li
+app.post('/api/applications', async (req, res) => {
   try {
-    const bodyData = req.body;
+    const { name, phone, company } = req.body;
 
-    // Supabase-dagi jadvalingiz nomini 'users' o'rniga yozing
+    // Supabase-dagi jadval nomi (masalan: 'applications')
     const { data, error } = await supabase
-      .from('users') 
-      .insert([bodyData]);
+      .from('applications') 
+      .insert([{ name, phone, company }]);
 
     if (error) {
+      console.error('Supabase xatosi:', error);
       return res.status(400).json({ success: false, error: error.message });
     }
 
-    return res.status(200).json({
-      success: true,
-      message: "Data muvaffaqiyatli saqlandi!",
-      data
-    });
+    return res.status(200).json({ success: true, data });
   } catch (err) {
+    console.error('Server xatosi:', err);
     return res.status(500).json({ success: false, error: err.message });
   }
 });
 
-// Local kompyuterda ishlatish uchun port
 if (process.env.NODE_ENV !== 'production') {
   const PORT = process.env.PORT || 4000;
-  app.listen(PORT, () => {
-    console.log(`Server ${PORT}-portda ishlayapti`);
-  });
+  app.listen(PORT, () => console.log(`Server http://localhost:${PORT} da ishlayapti`));
 }
 
 export default app;
